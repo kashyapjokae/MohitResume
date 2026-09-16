@@ -147,8 +147,8 @@ export const resume: CombinedResume = {
   ],
   languages: "English: Professional Working Proficiency  |  Hindi: Full Professional Proficiency  |  Punjabi: Professional Working Proficiency",
   downloads: [
-    { label: "PDF", href: "Mohit_Kumar_Engg.pdf", kind: "pdf" },
-    { label: "Word", href: "Mohit_Kumar_Engg.docx", kind: "docx" },
+    { label: "PDF", href: "api/download?format=pdf", kind: "pdf" },
+    { label: "Word", href: "api/download?format=docx", kind: "docx" },
   ],
   careerStart: "2021-07",
 };

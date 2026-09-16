@@ -54,7 +54,6 @@ export default function DownloadResume({ compact = false }: { compact?: boolean 
       <div className="flex overflow-hidden rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),inset_0_-1px_1px_rgba(255,255,255,0.12),0_18px_40px_-16px_rgba(79,70,229,0.85),0_0_30px_-10px_rgba(56,189,248,0.6)]">
         <a
           href={`/${pdf?.href ?? ""}`}
-          download={pdf?.href}
           className={`inline-flex items-center gap-2 bg-gradient-to-r from-sky-400 via-indigo-500 to-fuchsia-500 font-semibold text-white transition hover:-translate-y-0.5 hover:brightness-110 ${size}`}
         >
           <DownloadIcon className="h-4 w-4" />
@@ -88,7 +87,6 @@ export default function DownloadResume({ compact = false }: { compact?: boolean 
           {pdf && (
             <a
               href={`/${pdf.href}`}
-              download={pdf.href}
               onClick={() => setOpen(false)}
               className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-white transition hover:bg-white/10"
             >
@@ -99,7 +97,6 @@ export default function DownloadResume({ compact = false }: { compact?: boolean 
           {docx && (
             <a
               href={`/${docx.href}`}
-              download={docx.href}
               onClick={() => setOpen(false)}
               className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-white transition hover:bg-white/10"
             >
