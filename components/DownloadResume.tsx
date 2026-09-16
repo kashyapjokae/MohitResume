@@ -13,7 +13,7 @@ function DownloadIcon({ className }: { className?: string }) {
 
 function FileIcon({ kind }: { kind: "pdf" | "docx" }) {
   return kind === "pdf" ? (
-    <svg className="h-4 w-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg className="h-4 w-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -21,7 +21,7 @@ function FileIcon({ kind }: { kind: "pdf" | "docx" }) {
       />
     </svg>
   ) : (
-    <svg className="h-4 w-4 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg className="h-4 w-4 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -51,11 +51,11 @@ export default function DownloadResume({ compact = false }: { compact?: boolean 
 
   return (
     <div ref={wrapRef} className="relative inline-block">
-      <div className="flex overflow-hidden rounded-xl">
+      <div className="flex overflow-hidden rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),inset_0_-1px_1px_rgba(255,255,255,0.12),0_18px_40px_-16px_rgba(79,70,229,0.85),0_0_30px_-10px_rgba(56,189,248,0.6)]">
         <a
           href={`/${pdf?.href ?? ""}`}
           download={pdf?.href}
-          className={`inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-teal-600 font-semibold text-white shadow-lg shadow-black/25 transition hover:-translate-y-0.5 hover:brightness-110 ${size}`}
+          className={`inline-flex items-center gap-2 bg-gradient-to-r from-sky-400 via-indigo-500 to-fuchsia-500 font-semibold text-white transition hover:-translate-y-0.5 hover:brightness-110 ${size}`}
         >
           <DownloadIcon className="h-4 w-4" />
           Download Resume
@@ -66,7 +66,7 @@ export default function DownloadResume({ compact = false }: { compact?: boolean 
           aria-label="Choose download format"
           aria-expanded={open}
           onClick={() => setOpen((o) => !o)}
-          className="inline-flex items-center bg-gradient-to-r from-teal-600 to-indigo-700 px-2.5 text-white transition hover:brightness-110"
+          className="inline-flex items-center bg-gradient-to-br from-fuchsia-500 to-indigo-600 px-3 text-white transition hover:brightness-110"
         >
           <svg
             className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
@@ -81,7 +81,7 @@ export default function DownloadResume({ compact = false }: { compact?: boolean 
       </div>
 
       {open && (
-        <div className="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-xl border border-white/10 bg-zinc-900 shadow-2xl shadow-black/60">
+        <div className="glass-deep absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-2xl">
           <div className="border-b border-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-wider text-white/40">
             Download Resume
           </div>

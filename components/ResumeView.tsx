@@ -14,19 +14,19 @@ const TABS: { key: "all" | Track; label: string }[] = [
 ];
 
 const tabAccent: Record<"all" | Track, string> = {
-  all: "bg-white/15 text-white",
-  dotnet: "bg-indigo-600/90 text-white",
-  python: "bg-teal-600/90 text-white",
+  all: "bg-white/15 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)]",
+  dotnet: "bg-gradient-to-r from-sky-400 via-indigo-500 to-fuchsia-500 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),0_14px_30px_-12px_rgba(99,102,241,0.8)]",
+  python: "bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-500 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),0_14px_30px_-12px_rgba(20,184,166,0.8)]",
 };
 
 const focusAccent = {
-  dotnet: "border-l-indigo-500 bg-indigo-500/5",
-  python: "border-l-teal-500 bg-teal-500/5",
+  dotnet: "border-l-indigo-400 bg-indigo-500/8",
+  python: "border-l-teal-400 bg-teal-500/8",
 };
 
 const trackChip: Record<Track, string> = {
-  dotnet: "bg-indigo-500/15 text-indigo-600 border-indigo-500/30",
-  python: "bg-teal-500/15 text-teal-700 border-teal-500/30",
+  dotnet: "bg-indigo-500/15 text-indigo-300 border border-indigo-500/30",
+  python: "bg-teal-500/15 text-teal-300 border border-teal-500/30",
 };
 
 export default function ResumeView({ resume }: { resume: CombinedResume }) {
@@ -35,7 +35,7 @@ export default function ResumeView({ resume }: { resume: CombinedResume }) {
     tab === "all" ? resume.projects : resume.projects.filter((p) => p.track === tab);
 
   return (
-    <div className="min-h-screen bg-zinc-950 px-4 py-8 sm:px-6">
+    <div className="aurora-bg min-h-screen px-4 py-8 sm:px-6">
       <div className="mx-auto max-w-5xl">
         {/* Controls row */}
         <div className="no-print mb-6 flex flex-wrap items-center justify-between gap-4">
@@ -47,10 +47,10 @@ export default function ResumeView({ resume }: { resume: CombinedResume }) {
               ← Back to Dashboard
             </Link>
             <h2 className="text-2xl font-bold text-white">My Resume</h2>
-            <p className="text-sm text-white/40">
+            <p className="text-sm text-white/50">
               Updated <DynamicDate /> · Experience computed live{" "}
               <span className="text-white/25">|</span>{" "}
-              <span className="text-white/50">Total:</span>{" "}
+              <span className="text-white/60">Total:</span>{" "}
               <TotalExperience start="2021-07" className="font-semibold text-white/80" />
             </p>
           </div>
@@ -59,7 +59,7 @@ export default function ResumeView({ resume }: { resume: CombinedResume }) {
             <button
               type="button"
               onClick={() => window.print()}
-              className="inline-flex items-center gap-2 rounded-xl border border-white/15 px-5 py-2.5 text-sm font-semibold text-white/70 transition hover:bg-white/10 hover:text-white"
+              className="glass-capsule inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white/80 transition hover:-translate-y-0.5 hover:bg-white/15"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path
@@ -73,12 +73,13 @@ export default function ResumeView({ resume }: { resume: CombinedResume }) {
           </div>
         </div>
 
-        {/* Resume "paper" */}
-        <div className="print-area overflow-hidden rounded-3xl border border-white/10 bg-white shadow-2xl shadow-black/40">
+        {/* Resume "paper" — keeps a solid white for print */}
+        <div className="print-area overflow-hidden rounded-[2rem] border border-white/10 bg-white shadow-[0_32px_70px_-24px_rgba(0,0,0,0.55),inset_0_1px_1px_rgba(255,255,255,0.4)]">
           {/* Gradient header */}
           <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-8 pt-10 pb-8 sm:px-12">
-            <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-indigo-600/20 blur-3xl" />
-            <div className="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-teal-600/15 blur-3xl" />
+            <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-indigo-600/25 blur-3xl" />
+            <div className="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-teal-600/20 blur-3xl" />
+            <div className="absolute -bottom-20 -right-12 h-52 w-52 rounded-full bg-fuchsia-600/18 blur-3xl" />
             <div className="relative">
               <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                 Mohit Kumar
@@ -283,9 +284,9 @@ export default function ResumeView({ resume }: { resume: CombinedResume }) {
         <div className="no-print mt-6 flex flex-wrap items-center justify-between gap-4">
           <DownloadResume />
           <div className="flex flex-wrap items-center gap-3">
-            <p className="text-sm text-white/40">
+            <p className="text-sm text-white/50">
               Total experience:{" "}
-              <ExperienceShort start="2021-07" className="font-semibold text-white/70" />
+              <ExperienceShort start="2021-07" className="font-semibold text-white/80" />
             </p>
             <VisitorCounter />
           </div>
