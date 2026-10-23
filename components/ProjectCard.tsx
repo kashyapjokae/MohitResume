@@ -44,7 +44,7 @@ export default function ProjectCard({ project }: { project: ProjectHighlight }) 
           {project.tags.map((t) => (
             <span
               key={t}
-              className="rounded-full bg-white/[0.07] px-2 py-0.5 text-[11px] font-medium text-white/60 ring-1 ring-inset ring-white/10"
+              className="rounded-full bg-white/[0.07] px-2 py-0.5 text-[11px] font-medium text-white/60 ring-1 ring-inset ring-white/10 transition hover:bg-white/[0.12] hover:text-white/80"
             >
               {t}
             </span>
