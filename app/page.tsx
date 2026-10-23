@@ -9,48 +9,15 @@ import DownloadResume from "@/components/DownloadResume";
 import { TotalExperience, DynamicDate } from "@/components/Experience";
 import { resume } from "@/lib/resume";
 import { tenureBetween } from "@/lib/experience";
-import { FadeIn, FadeInScale, Floating, HeroItem, HeroReveal, StaggerContainer, StaggerItem } from "@/components/Motion";
+import { FadeIn, FadeInScale, Floating, HeroItem, HeroReveal } from "@/components/Motion";
 import { motion } from "framer-motion";
+import GenieScrollReveal from "@/components/GenieScrollReveal";
 
 export default function Home() {
   const dotnetCount = resume.projects.filter((p) => p.track === "dotnet").length;
   const pythonCount = resume.projects.filter((p) => p.track === "python").length;
   const expDotnet = tenureBetween("2024-06");
   const expCareer = tenureBetween("2021-07");
-
-  const genie = {
-    hidden: { opacity: 0, scale: 0.8, y: 60, x: -40, filter: "blur(10px)" },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      x: 0,
-      filter: "blur(0px)",
-      transition: {
-        type: "spring" as const,
-        stiffness: 120,
-        damping: 14,
-        mass: 0.8,
-      },
-    },
-  };
-
-  const genieRight = {
-    hidden: { opacity: 0, scale: 0.8, y: 60, x: 40, filter: "blur(10px)" },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      x: 0,
-      filter: "blur(0px)",
-      transition: {
-        type: "spring" as const,
-        stiffness: 120,
-        damping: 14,
-        mass: 0.8,
-      },
-    },
-  };
 
   return (
     <>
@@ -62,7 +29,8 @@ export default function Home() {
           <Floating className="absolute -top-20 right-[-10rem] h-[32rem] w-[32rem] rounded-full bg-fuchsia-500/18 blur-[140px]" style={{ animationDelay: "2s" } as React.CSSProperties} />
           <Floating className="absolute bottom-[-20rem] left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-indigo-500/16 blur-[160px]" style={{ animationDelay: "4s" } as React.CSSProperties} />
         </div>
-        <div className="mx-auto max-w-5xl px-6 pt-24 pb-20 relative">
+        <GenieScrollReveal>
+        <div className="mx-auto max-w-5xl px-6 pt-24 pb-40 relative">
           {/* Hero */}
           <section className="mb-24 text-center">
             <HeroReveal>
@@ -150,54 +118,9 @@ export default function Home() {
 
           {/* Focus areas */}
           <section className="mb-24">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.15 }}
-              variants={{
-                hidden: {},
-                visible: {
-                  transition: {
-                    staggerChildren: 0.12,
-                  },
-                },
-              }}
-              className="grid gap-5 sm:grid-cols-2"
-            >
+            <div className="grid gap-5 sm:grid-cols-2">
               {resume.focus.map((f) => (
-                <motion.div
-                  key={f.key}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.25 }}
-                  variants={{
-                    hidden: {
-                      opacity: 0,
-                      scale: 0.55,
-                      y: 90,
-                      rotateX: 26,
-                      filter: "blur(12px)",
-                      transformOrigin: "bottom center",
-                    },
-                    visible: {
-                      opacity: 1,
-                      scale: 1,
-                      y: 0,
-                      rotateX: 0,
-                      filter: "blur(0px)",
-                      transformOrigin: "bottom center",
-                      transition: {
-                        type: "spring" as const,
-                        stiffness: 135,
-                        damping: 15,
-                        mass: 0.9,
-                      },
-                    },
-                  }}
-                  whileHover={{ y: -12, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                  style={{ perspective: 1100, transformStyle: "preserve-3d" }}
-                >
+                <div key={f.key} data-genie-item style={{ perspective: 1200, transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}>
                   <div className="glass h-full rounded-3xl p-6 transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.09] hover:shadow-[0_40px_80px_-40px_rgba(99,102,241,0.6)]">
                     <div className="mb-3 flex items-center gap-3">
                       <span
@@ -221,173 +144,72 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </section>
 
           {/* Projects */}
           <section id="projects" className="mb-24 scroll-mt-24">
             <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={{
-                hidden: {},
-                visible: {
-                  transition: {
-                    staggerChildren: 0.15,
-                    delayChildren: 0.1,
-                  },
-                },
-              }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
             >
-              <motion.div variants={genie}>
-                <SectionHeading
-                  eyebrow="Featured Work"
-                  title="Key Projects Highlights"
-                  subtitle={`All projects from a single resume — ${dotnetCount} .NET enterprise projects and ${pythonCount} Python/AI hands-on projects.`}
-                />
-              </motion.div>
-              <motion.div variants={genie} className="mb-6 flex flex-wrap justify-center gap-4 text-xs text-white/40">
-                <span className="flex items-center gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-indigo-400 shadow-[0_0_20px_rgba(99,102,241,0.8)]" /> .NET projects
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-teal-400 shadow-[0_0_20px_rgba(45,212,191,0.8)]" /> Python projects
-                </span>
-              </motion.div>
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-                variants={{
-                  hidden: {},
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.14,
-                    },
-                  },
-                }}
-                className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
-              >
-                {resume.projects.map((p) => (
-                  <motion.div
-                    key={p.name}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.25 }}
-                    variants={{
-                      hidden: {
-                        opacity: 0,
-                        scale: 0.55,
-                        y: 90,
-                        rotateX: 30,
-                        filter: "blur(14px)",
-                        transformOrigin: "bottom center",
-                      },
-                      visible: {
-                        opacity: 1,
-                        scale: 1,
-                        y: 0,
-                        rotateX: 0,
-                        filter: "blur(0px)",
-                        transformOrigin: "bottom center",
-                        transition: {
-                          type: "spring" as const,
-                          stiffness: 130,
-                          damping: 14,
-                          mass: 0.9,
-                        },
-                      },
-                    }}
-                    style={{ perspective: 1400, transformStyle: "preserve-3d" }}
-                  >
-                    <ProjectCard project={p} />
-                  </motion.div>
-                ))}
-              </motion.div>
+              <SectionHeading
+                eyebrow="Featured Work"
+                title="Key Projects Highlights"
+                subtitle={`All projects from a single resume — ${dotnetCount} .NET enterprise projects and ${pythonCount} Python/AI hands-on projects.`}
+              />
             </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.4, 0.25, 1] }}
+              className="mb-6 flex flex-wrap justify-center gap-4 text-xs text-white/40"
+            >
+              <span className="flex items-center gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-indigo-400 shadow-[0_0_20px_rgba(99,102,241,0.8)]" /> .NET projects
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-teal-400 shadow-[0_0_20px_rgba(45,212,191,0.8)]" /> Python projects
+              </span>
+            </motion.div>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {resume.projects.map((p) => (
+                <div key={p.name} data-genie-item style={{ perspective: 1400, transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}>
+                  <ProjectCard project={p} />
+                </div>
+              ))}
+            </div>
           </section>
 
           {/* Skills */}
           <section className="mb-24">
             <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={{
-                hidden: {},
-                visible: {
-                  transition: {
-                    staggerChildren: 0.12,
-                  },
-                },
-              }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
             >
-              <motion.div variants={genie}>
-                <SectionHeading
-                  eyebrow="Expertise"
-                  title="Technical Skills"
-                  subtitle="A full-stack toolkit spanning .NET, Python, React, PostgreSQL, Docker, Kubernetes, and cloud platforms."
-                />
-              </motion.div>
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.15 }}
-                variants={{
-                  hidden: {},
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.1,
-                    },
-                  },
-                }}
-                className="grid gap-4 sm:grid-cols-2"
-              >
-                {resume.skills.map((skill) => (
-                  <motion.div
-                    key={skill.label}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.25 }}
-                    variants={{
-                      hidden: {
-                        opacity: 0,
-                        scale: 0.55,
-                        y: 90,
-                        rotateX: 28,
-                        filter: "blur(12px)",
-                        transformOrigin: "bottom center",
-                      },
-                      visible: {
-                        opacity: 1,
-                        scale: 1,
-                        y: 0,
-                        rotateX: 0,
-                        filter: "blur(0px)",
-                        transformOrigin: "bottom center",
-                        transition: {
-                          type: "spring" as const,
-                          stiffness: 135,
-                          damping: 15,
-                          mass: 0.9,
-                        },
-                      },
-                    }}
-                    whileHover={{ y: -10, scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                    style={{ perspective: 1100, transformStyle: "preserve-3d" }}
-                  >
-                    <div className="glass h-full rounded-2xl p-5 transition-all duration-500 hover:-translate-y-1 hover:bg-white/[0.09]">
-                      <h3 className="text-sm font-bold text-sky-300">{skill.label}</h3>
-                      <p className="mt-1.5 text-sm leading-relaxed text-white/60">{skill.value}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
+              <SectionHeading
+                eyebrow="Expertise"
+                title="Technical Skills"
+                subtitle="A full-stack toolkit spanning .NET, Python, React, PostgreSQL, Docker, Kubernetes, and cloud platforms."
+              />
             </motion.div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {resume.skills.map((skill) => (
+                <div key={skill.label} data-genie-item style={{ perspective: 1200, transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}>
+                  <div className="glass h-full rounded-2xl p-5 transition-all duration-500 hover:-translate-y-1 hover:bg-white/[0.09]">
+                    <h3 className="text-sm font-bold text-sky-300">{skill.label}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-white/60">{skill.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </section>
 
           {/* Download CTA */}
@@ -409,6 +231,7 @@ export default function Home() {
             </FadeInScale>
           </section>
         </div>
+        </GenieScrollReveal>
       </main>
       <Footer />
     </>

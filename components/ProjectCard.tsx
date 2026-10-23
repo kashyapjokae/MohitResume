@@ -26,31 +26,6 @@ const trackStyle: Record<
   },
 };
 
-const genieCard = {
-  hidden: {
-    opacity: 0,
-    scale: 0.6,
-    y: 80,
-    rotateX: 25,
-    filter: "blur(12px)",
-    transformOrigin: "bottom center",
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    rotateX: 0,
-    filter: "blur(0px)",
-    transformOrigin: "bottom center",
-    transition: {
-      type: "spring",
-      stiffness: 140,
-      damping: 16,
-      mass: 0.9,
-    },
-  },
-};
-
 export default function ProjectCard({ project }: { project: ProjectHighlight }) {
   const style = trackStyle[project.track] ?? trackStyle.dotnet;
 
