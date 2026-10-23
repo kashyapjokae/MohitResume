@@ -149,10 +149,55 @@ export default function Home() {
           </section>
 
           {/* Focus areas */}
-          <section className="mb-24 grid gap-5 sm:grid-cols-2">
-            <StaggerContainer className="contents">
+          <section className="mb-24">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.12,
+                  },
+                },
+              }}
+              className="grid gap-5 sm:grid-cols-2"
+            >
               {resume.focus.map((f) => (
-                <StaggerItem key={f.key}>
+                <motion.div
+                  key={f.key}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.25 }}
+                  variants={{
+                    hidden: {
+                      opacity: 0,
+                      scale: 0.55,
+                      y: 90,
+                      rotateX: 26,
+                      filter: "blur(12px)",
+                      transformOrigin: "bottom center",
+                    },
+                    visible: {
+                      opacity: 1,
+                      scale: 1,
+                      y: 0,
+                      rotateX: 0,
+                      filter: "blur(0px)",
+                      transformOrigin: "bottom center",
+                      transition: {
+                        type: "spring" as const,
+                        stiffness: 135,
+                        damping: 15,
+                        mass: 0.9,
+                      },
+                    },
+                  }}
+                  whileHover={{ y: -12, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                  style={{ perspective: 1100, transformStyle: "preserve-3d" }}
+                >
                   <div className="glass h-full rounded-3xl p-6 transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.09] hover:shadow-[0_40px_80px_-40px_rgba(99,102,241,0.6)]">
                     <div className="mb-3 flex items-center gap-3">
                       <span
@@ -176,9 +221,9 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-                </StaggerItem>
+                </motion.div>
               ))}
-            </StaggerContainer>
+            </motion.div>
           </section>
 
           {/* Projects */}
