@@ -80,7 +80,7 @@ export function StaggerItem({ children, className = "" }: { children: ReactNode;
   );
 }
 
-export function Floating({ children, className = "" }: { children: ReactNode; className?: string }) {
+export function Floating({ children, className = "", style }: { children?: ReactNode; className?: string; style?: React.CSSProperties }) {
   return (
     <motion.div
       animate={{
@@ -92,6 +92,7 @@ export function Floating({ children, className = "" }: { children: ReactNode; cl
         ease: "easeInOut",
       }}
       className={className}
+      style={style}
     >
       {children}
     </motion.div>
