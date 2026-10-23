@@ -8,8 +8,8 @@ export const resume: CombinedResume = {
     "mohitkumarjokae@gmail.com",
     "+91 7015325817",
     "Shahbad, Kurukshetra, India",
-    "linkedin.com/in/mohitkumarkojae",
-    "mohitjokae.vercel.app",
+    "LinkedIn: linkedin.com/in/mohitkumarkojae",
+    "Portfolio: mohitjokae.vercel.app",
   ],
   summary:
     "Full Stack Software Engineer with 5+ years of experience designing, developing and supporting enterprise-scale applications for Government of Punjab NIC projects. Strong hands-on expertise in C#, .NET, ASP.NET Core, Minimal APIs, Clean/N-Layer Architecture, PostgreSQL, React, Next.js, TypeScript, Docker and Kubernetes. Currently serving as Lead Developer and Technical Reviewer across multiple enterprise projects, including the BBMB 13-module platform. Experienced in reusable .NET frameworks, authentication/SSO integration, microservices, production troubleshooting, API integration and end-to-end feature ownership. Also have ~1 year of hands-on Python/FastAPI and AI application development.",
