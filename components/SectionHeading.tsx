@@ -10,14 +10,17 @@ export function SectionHeading({
   id?: string;
 }) {
   return (
-    <div id={id} className="mb-10 text-center">
+    <div id={id}>
       {eyebrow && (
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">
-          {eyebrow}
-        </p>
+        <div className="flex items-center gap-3">
+          <span className="h-px w-10 bg-forest-soft/70" />
+          <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-forest-soft">{eyebrow}</p>
+        </div>
       )}
-      <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{title}</h2>
-      {subtitle && <p className="mx-auto mt-3 max-w-2xl text-white/60">{subtitle}</p>}
+      <h2 className="mt-4 max-w-3xl text-[clamp(2.4rem,5.5vw,4.5rem)] font-black leading-[0.95] tracking-[-0.04em] text-bone">
+        {title}
+      </h2>
+      {subtitle && <p className="mt-5 max-w-xl text-sm leading-relaxed text-bone/45 sm:text-base">{subtitle}</p>}
     </div>
   );
 }

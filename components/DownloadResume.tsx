@@ -13,7 +13,7 @@ function DownloadIcon({ className }: { className?: string }) {
 
 function FileIcon({ kind }: { kind: "pdf" | "docx" }) {
   return kind === "pdf" ? (
-    <svg className="h-4 w-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg className="h-4 w-4 text-forest-soft" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -21,7 +21,7 @@ function FileIcon({ kind }: { kind: "pdf" | "docx" }) {
       />
     </svg>
   ) : (
-    <svg className="h-4 w-4 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg className="h-4 w-4 text-oxblood-soft" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -47,17 +47,17 @@ export default function DownloadResume({ compact = false }: { compact?: boolean 
 
   const pdf = resume.downloads.find((d) => d.kind === "pdf");
   const docx = resume.downloads.find((d) => d.kind === "docx");
-  const size = compact ? "px-4 py-2 text-sm" : "px-5 py-2.5 text-sm";
+  const size = compact ? "px-4 py-2 text-xs" : "px-5 py-2.5 text-sm";
 
   return (
     <div ref={wrapRef} className="relative inline-block">
-      <div className="flex overflow-hidden rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),inset_0_-1px_1px_rgba(255,255,255,0.12),0_18px_40px_-16px_rgba(79,70,229,0.85),0_0_30px_-10px_rgba(56,189,248,0.6)]">
+      <div className="flex overflow-hidden rounded-full shadow-[0_18px_45px_-20px_rgba(6,64,43,0.85)]">
         <a
           href={`/${pdf?.href ?? ""}`}
-          className={`inline-flex items-center gap-2 bg-gradient-to-r from-sky-400 via-indigo-500 to-fuchsia-500 font-semibold text-white transition hover:-translate-y-0.5 hover:brightness-110 ${size}`}
+          className={`inline-flex items-center gap-2 bg-forest font-semibold text-bone transition hover:-translate-y-0.5 hover:bg-[#0a5538] ${size}`}
         >
           <DownloadIcon className="h-4 w-4" />
-          Download Resume
+          Download <span className="hidden sm:inline">Resume</span>
         </a>
         <button
           type="button"
@@ -65,7 +65,7 @@ export default function DownloadResume({ compact = false }: { compact?: boolean 
           aria-label="Choose download format"
           aria-expanded={open}
           onClick={() => setOpen((o) => !o)}
-          className="inline-flex items-center bg-gradient-to-br from-fuchsia-500 to-indigo-600 px-3 text-white transition hover:brightness-110"
+          className="inline-flex items-center bg-oxblood px-2.5 text-bone transition hover:brightness-110"
         >
           <svg
             className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
@@ -80,15 +80,17 @@ export default function DownloadResume({ compact = false }: { compact?: boolean 
       </div>
 
       {open && (
-        <div className="glass-deep absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-2xl">
-          <div className="border-b border-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-wider text-white/40">
-            Download Resume
+        <div className="glass absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-2xl bg-ink/95">
+          <div className="flex items-center gap-2 border-b border-bone/10 px-4 py-2 font-mono text-[9px] uppercase tracking-[0.25em] text-bone/40">
+            <span className="h-1.5 w-1.5 rounded-full bg-forest-soft" />
+            Choose format
+            <span className="ml-auto h-1.5 w-1.5 rounded-full bg-oxblood-soft" />
           </div>
           {pdf && (
             <a
               href={`/${pdf.href}`}
               onClick={() => setOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-white transition hover:bg-white/10"
+              className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-bone/70 transition hover:bg-forest/20 hover:text-forest-soft"
             >
               <FileIcon kind="pdf" />
               PDF Version
@@ -98,7 +100,7 @@ export default function DownloadResume({ compact = false }: { compact?: boolean 
             <a
               href={`/${docx.href}`}
               onClick={() => setOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-white transition hover:bg-white/10"
+              className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-bone/70 transition hover:bg-oxblood/20 hover:text-oxblood-soft"
             >
               <FileIcon kind="docx" />
               Word Version

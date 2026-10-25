@@ -4,70 +4,76 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import type { ProjectHighlight } from "@/lib/types";
 
-const trackStyle: Record<
-  string,
-  { label: string; chip: string; accent: string; link: string; glow: string; orb: string }
-> = {
-  dotnet: {
-    label: ".NET",
-    chip: "text-indigo-200 ring-indigo-400/40",
-    accent: "group-hover:text-indigo-300",
-    link: "text-indigo-300 hover:text-indigo-200",
-    glow: "hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.3),0_40px_80px_-30px_rgba(99,102,241,0.6)] hover:border-indigo-400/50",
-    orb: "bg-indigo-400/25",
-  },
-  python: {
-    label: "Python",
-    chip: "text-teal-200 ring-teal-400/40",
-    accent: "group-hover:text-teal-300",
-    link: "text-teal-300 hover:text-teal-200",
-    glow: "hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.3),0_40px_80px_-30px_rgba(20,184,166,0.6)] hover:border-teal-400/50",
-    orb: "bg-teal-400/25",
-  },
-};
-
-export default function ProjectCard({ project }: { project: ProjectHighlight }) {
-  const style = trackStyle[project.track] ?? trackStyle.dotnet;
+export default function ProjectCard({
+  project,
+  index,
+}: {
+  project: ProjectHighlight;
+  index: number;
+}) {
+  const isDotnet = project.track === "dotnet";
+  const accentText = isDotnet ? "text-forest-soft" : "text-oxblood-soft";
+  const accentBg = isDotnet ? "bg-forest" : "bg-oxblood";
 
   return (
     <motion.div
-      whileHover={{ y: -12, scale: 1.03, rotateX: -2 }}
-      transition={{ type: "spring", stiffness: 280, damping: 18 }}
-      style={{ perspective: 1200, transformStyle: "preserve-3d" }}
-      className={`glass group relative flex h-full flex-col overflow-hidden rounded-3xl p-6 transition-all duration-500 hover:bg-white/[0.09] ${style.glow}`}
+      layout
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.35 }}
+      transition={{ duration: 0.5, delay: Math.min(index * 0.035, 0.25) }}
     >
-      <div className={`pointer-events-none absolute -top-20 right-[-40%] h-48 w-48 rounded-full blur-3xl transition-all duration-700 group-hover:scale-150 ${style.orb}`} />
-      <div className="relative mb-3 flex flex-wrap items-center gap-2">
-        <span className={`glass-capsule rounded-full px-2.5 py-0.5 text-[11px] font-semibold ring-1 ring-inset ${style.chip}`}>
-          {style.label}
-        </span>
-        <span className="text-xs font-medium text-white/40">{project.period}</span>
-        {project.org && <span className="text-xs text-white/30">· {project.org}</span>}
-      </div>
-      <h3 className={`relative text-lg font-semibold text-white transition-colors ${style.accent}`}>
-        {project.name}
-      </h3>
-      <p className="relative mt-2 flex-1 text-sm leading-relaxed text-white/60">{project.summary}</p>
-      {project.tags.length > 0 && (
-        <div className="relative mt-4 flex flex-wrap gap-1.5">
-          {project.tags.map((t) => (
-            <span
-              key={t}
-              className="rounded-full bg-white/[0.07] px-2 py-0.5 text-[11px] font-medium text-white/60 ring-1 ring-inset ring-white/10 transition hover:bg-white/[0.12] hover:text-white/80"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-      )}
       <Link
         href="/resume#projects"
-        className={`relative mt-5 inline-flex items-center gap-1 text-sm font-medium transition-colors ${style.link}`}
+        className="group relative grid grid-cols-[auto_1fr_auto] items-start gap-4 border-b border-bone/10 py-6 sm:items-center sm:gap-6"
       >
-        Explore on resume
-        <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
+        <span
+          className={`absolute inset-0 origin-bottom scale-y-0 transition-transform duration-500 ease-out group-hover:scale-y-100 ${accentBg}`}
+        />
+        <span className="relative z-10 pt-1 font-mono text-[10px] tracking-[0.25em] text-bone/30 transition group-hover:text-bone/60 sm:pt-0">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+
+        <div className="relative z-10 min-w-0">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] uppercase tracking-[0.22em]">
+            <span className={`${accentText} transition group-hover:text-bone/80`}>
+              {isDotnet ? ".NET" : "Python"}
+            </span>
+            <span className="text-bone/25 transition group-hover:text-bone/60">{project.period}</span>
+            {project.org && (
+              <span className="text-bone/25 transition group-hover:text-bone/60">— {project.org}</span>
+            )}
+          </div>
+          <h3 className="mt-1.5 text-xl font-bold tracking-tight text-bone transition group-hover:text-bone sm:text-2xl">
+            {project.name}
+          </h3>
+          <p className="mt-1 line-clamp-2 max-w-3xl text-sm leading-relaxed text-bone/40 transition group-hover:text-bone/75">
+            {project.summary}
+          </p>
+          {project.tags.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {project.tags.slice(0, 6).map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-bone/10 px-2 py-0.5 text-[10px] text-bone/40 transition group-hover:border-bone/25 group-hover:text-bone/70"
+                >
+                  {tag}
+                </span>
+              ))}
+              {project.tags.length > 6 && (
+                <span className="px-1 py-0.5 text-[10px] text-bone/30 transition group-hover:text-bone/60">
+                  +{project.tags.length - 6}
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+
+        <span className="relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border border-bone/15 text-bone/50 transition duration-300 group-hover:rotate-45 group-hover:border-bone/30 group-hover:text-bone">
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H8m9 0v9" />
+          </svg>
+        </span>
       </Link>
     </motion.div>
   );

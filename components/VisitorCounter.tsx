@@ -53,10 +53,10 @@ export default function VisitorCounter({ className = "" }: { className?: string 
 
   return (
     <span
-      className={`glass-capsule inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs text-white/60 ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border border-bone/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.15em] text-bone/40 ${className}`}
       title={country ? `Visitor from ${country.name}` : "Total visitors"}
     >
-      <svg className="h-3.5 w-3.5 text-sky-400/90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <svg className="h-3.5 w-3.5 text-forest-soft/90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -67,7 +67,7 @@ export default function VisitorCounter({ className = "" }: { className?: string 
       {count.toLocaleString()} visitors
       {country && (
         <>
-          <span className="h-3 w-px bg-white/10" />
+          <span className="h-3 w-px bg-bone/10" />
           <span title={country.name}>{countryFlag(country.code)}</span>
           <span>{country.name}</span>
         </>

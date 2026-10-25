@@ -116,11 +116,11 @@ export default function GenieScrollReveal({ children }: { children: React.ReactN
       >
         <div className="relative">
           <div className="relative h-32 w-32 sm:h-36 sm:w-36">
-            <div className="absolute bottom-0 left-1/2 h-22 w-22 -translate-x-1/2 rounded-b-[2.4rem] bg-gradient-to-b from-amber-500/98 via-amber-700/100 to-amber-950 shadow-[0_60px_100px_-35px_rgba(251,191,36,0.6)]" />
-            <div className="absolute bottom-20 left-1/2 h-14 w-18 -translate-x-1/2 rounded-t-[1.8rem] bg-gradient-to-b from-amber-400/92 to-amber-600/98" />
-            <div className="absolute bottom-32 left-1/2 h-5 w-14 -translate-x-1/2 rounded-full bg-amber-900/95" />
-            <div className="absolute -top-2 left-1/2 h-9 w-20 -translate-x-1/2 rounded-full bg-gradient-to-b from-amber-300/90 to-amber-500/80 blur-[1px]" />
-            <div className="absolute -top-6 left-1/2 h-5 w-16 -translate-x-1/2 rounded-full bg-amber-200/75 blur-[3px]" />
+            <div className="absolute bottom-0 left-1/2 h-22 w-22 -translate-x-1/2 rounded-b-[2.4rem] bg-gradient-to-b from-brand-red via-brand-red-deep to-black shadow-[0_60px_100px_-35px_rgba(139,0,0,0.9)] ring-1 ring-inset ring-brand-red-soft/20" />
+            <div className="absolute bottom-20 left-1/2 h-14 w-18 -translate-x-1/2 rounded-t-[1.8rem] bg-gradient-to-b from-brand-red to-brand-red-deep" />
+            <div className="absolute bottom-32 left-1/2 h-5 w-14 -translate-x-1/2 rounded-full bg-black ring-1 ring-inset ring-brand-red/60" />
+            <div className="absolute -top-2 left-1/2 h-9 w-20 -translate-x-1/2 rounded-full bg-gradient-to-b from-brand-green-soft/80 to-brand-green/80 blur-[1px]" />
+            <div className="absolute -top-6 left-1/2 h-5 w-16 -translate-x-1/2 rounded-full bg-brand-green-soft/60 blur-[3px]" />
           </div>
         </div>
       </div>
@@ -130,9 +130,9 @@ export default function GenieScrollReveal({ children }: { children: React.ReactN
         className="pointer-events-none fixed bottom-24 right-10 z-[89] opacity-0 sm:bottom-28 sm:right-14"
       >
         <div className="relative">
-          <div className="h-40 w-40 rounded-full bg-gradient-to-t from-fuchsia-400/60 via-violet-400/40 to-transparent blur-[60px]" />
-          <div className="absolute left-10 top-[-30px] h-32 w-32 rounded-full bg-gradient-to-t from-cyan-400/55 via-sky-400/35 to-transparent blur-[50px]" />
-          <div className="absolute left-[-20px] top-[-40px] h-36 w-36 rounded-full bg-gradient-to-t from-indigo-400/50 via-purple-400/30 to-transparent blur-[60px]" />
+          <div className="h-40 w-40 rounded-full bg-gradient-to-t from-brand-green-soft/60 via-brand-green/50 to-transparent blur-[60px]" />
+          <div className="absolute left-10 top-[-30px] h-32 w-32 rounded-full bg-gradient-to-t from-brand-red-soft/55 via-brand-red/45 to-transparent blur-[50px]" />
+          <div className="absolute left-[-20px] top-[-40px] h-36 w-36 rounded-full bg-gradient-to-t from-brand-green-soft/50 via-brand-green/40 to-transparent blur-[60px]" />
         </div>
       </div>
 

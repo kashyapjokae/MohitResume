@@ -6,6 +6,11 @@ export const metadata = {
     "Portfolio of Mohit Kumar — Full Stack .NET Developer & Software Engineer with 5+ years building enterprise applications for Govt. of Punjab NIC projects. View resumes, projects, skills and downloads.",
 };
 
+export const viewport = {
+  themeColor: "#08090A",
+  colorScheme: "dark",
+};
+
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en" className="h-full antialiased">
