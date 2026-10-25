@@ -8,7 +8,7 @@ export const resume: CombinedResume = {
     "mohitkumarjokae@gmail.com",
     "+91 7015325817",
     "Shahbad, Kurukshetra, India",
-    "LinkedIn: linkedin.com/in/mohitkumarkojae",
+    "LinkedIn: linkedin.com/in/mohitkumarjokae",
     "Portfolio: mohitjokae.vercel.app",
   ],
   summary:
